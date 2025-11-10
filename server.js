@@ -22,29 +22,22 @@ const { MongoClient } = require('mongodb');
 const fs = require('fs').promises;
 const path = require('path');
 
-// async function importFile() {
-//     const fileContent = await fs.readFile(`./sampleHealthRecord.json`, 'utf8');
-//     const data = JSON.parse(fileContent);
-//     console.log(JSON.stringify(data, null, 2));
-//     const collection = mongoose.connection.collection('genomicindicators'); // Change 'bundles' to your collection name
-//         const result = await collection.insertOne(data);
-// }
-// importFile()
+async function importFile(filename) {
+    const fileContent = await fs.readFile(`./${filename}.json`, 'utf8');
+    const data = JSON.parse(fileContent);
+    // console.log(JSON.stringify(data, null, 2));
+    const collection = mongoose.connection.collection('genomicindicators'); // Change 'bundles' to your collection name
+        const result = await collection.insertOne(data);
+}
 
-      
-//       
-//       console.log(`✓ Imported: ${path.basename(filePath)} (ID: ${result.insertedId})`);
-//       return true;
-//     } catch (error) {
-//       if (error instanceof SyntaxError) {
-//         console.error(`✗ JSON Parse Error in ${path.basename(filePath)}:`, error.message);
-//       } else {
-//         console.error(`✗ Error importing ${path.basename(filePath)}:`, error.message);
-//       }
-//       return false;
-//     }
-//   }
-
+// -- Import the 10 dummy records
+// importFile('sampleHealthRecord4')
+// importFile('sampleHealthRecord5')
+// importFile('sampleHealthRecord6')
+// importFile('sampleHealthRecord7')
+// importFile('sampleHealthRecord8')
+// importFile('sampleHealthRecord9')
+// importFile('sampleHealthRecord10')
 
 // - Routes
 // -- CREATE - POST - /pets

@@ -4,8 +4,6 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
-const genomicIndicators = require('./models/genomicIndicators.js');
-
 mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on('connected', () => {
@@ -16,6 +14,37 @@ app.use(express.json());
 
 const cors = require('cors');
 app.use(cors());
+
+const genomicIndicators = require('./models/genomicIndicators.js');
+
+// - Experimental - import Synthea data
+const { MongoClient } = require('mongodb');
+const fs = require('fs').promises;
+const path = require('path');
+
+// async function importFile() {
+//     const fileContent = await fs.readFile(`./sampleHealthRecord.json`, 'utf8');
+//     const data = JSON.parse(fileContent);
+//     console.log(JSON.stringify(data, null, 2));
+//     const collection = mongoose.connection.collection('genomicindicators'); // Change 'bundles' to your collection name
+//         const result = await collection.insertOne(data);
+// }
+// importFile()
+
+      
+//       
+//       console.log(`✓ Imported: ${path.basename(filePath)} (ID: ${result.insertedId})`);
+//       return true;
+//     } catch (error) {
+//       if (error instanceof SyntaxError) {
+//         console.error(`✗ JSON Parse Error in ${path.basename(filePath)}:`, error.message);
+//       } else {
+//         console.error(`✗ Error importing ${path.basename(filePath)}:`, error.message);
+//       }
+//       return false;
+//     }
+//   }
+
 
 // - Routes
 // -- CREATE - POST - /pets
@@ -56,8 +85,6 @@ app.listen(3000, () => {
 
 // ----- Experimental
 
-// const fs = require('fs');
-// const path = require('path');
 
 // let jsonObject;
 

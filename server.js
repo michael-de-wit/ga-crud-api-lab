@@ -24,6 +24,31 @@ app.post('/genomicIndicators', async (req, res) => {
   res.json(createdGenomicIndicator)
 });
 
+// -- READ - GET - /pets
+app.get('/genomicIndicators', async (req, res) => {
+	// Add a message to test the route
+	const foundGenomicIndicators = await genomicIndicators.find();
+    res.json(foundGenomicIndicators);
+});
+
+// -- DELETE
+app.delete('/genomicIndicators/:genomicIndicatorsId', async (req, res) => {
+	// Add a message to test the route
+	const deletedGenomicIndicator = await genomicIndicators.findByIdAndDelete(req.params.genomicIndicatorsId);
+    res.json(deletedGenomicIndicator);
+});
+
+// -- UPDATE - PUT - /pets/:petId
+app.put('/genomicIndicators/:genomicIndicatorsId', async (req, res) => {
+    // Add { new: true } as the third argument
+    const updatedGenomicIndicator = await genomicIndicators.findByIdAndUpdate(
+	    req.params.genomicIndicatorsId, 
+	    req.body,
+	    {new: true}
+    );
+    res.json(updatedGenomicIndicator);
+});
+
 app.listen(3000, () => {
   console.log('The express app is ready!');
 });
